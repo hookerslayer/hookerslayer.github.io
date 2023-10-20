@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html = style="height: 100%;">
+  <head>
+    <title>Kenshi World Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scripts/leaflet.css">
+    <script src="scripts/leaflet.js"></script>
+  </head>
+  
+  <body style="height: 100%;margin: 0;">
+    <div id="map" style="width: 100%; height: 100%; background: #000000;"></div>
+    <script type="text/javascript">
+  //Creating the Map
+    var map = L.map('map').setView([0, 0], 0);
+    L.tileLayer('map/{z}/{x}/{y}.png', {
+      continuousWorld: false,
+      noWrap: true,  
+      minZoom: 3,
+      maxZoom: 5,
+    }).addTo(map);
+	var town = L.icon({
+      iconUrl: 'markers/Town.png',
+      iconSize:     [57, 53],
+    });
+	var building = L.icon({
+      iconUrl: 'markers/Building.png'
+    });
+	var fortress = L.icon({
+      iconUrl: 'markers/Fortress.png'
+    });
+	var cross = L.icon({
+      iconUrl: 'markers/Cross.png'
+    });
+	var flag = L.icon({
+      iconUrl: 'markers/Flag.png'
+    });
+	var ruins = L.icon({
+      iconUrl: 'markers/ruins.png'
+    });
+  //Coordinate Finder
+    var marker = L.marker([0, 0], {
+      draggable: true,
+    }).addTo(map);
+    marker.bindPopup('LatLng Marker').openPopup();
+    marker.on('dragend', function(e) {
+      marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+    });
+  //Markers
+    var hub = L.marker([-4.521666, -61.743164], {icon: town, iconScale: 1}).bindPopup('Хаб<br />Фракция: Изгои Святой Нации<br />Описание: Полуразрушенный город, одно из основных прибежищ изгоев, бегущих от Святой Нации.').addTo(map);
+    var rebelsbase = L.marker([2.24064, -61.391602], {icon: building, iconScale: 1}).bindPopup('База Мятежников').addTo(map);
+    var sqin = L.marker([-19.311143, -75.893555], {icon: town, iconScale: 1}).bindPopup('Скуин').addTo(map);
+    var ruins_biblio1 = L.marker([-8.928487, -48.295898], {icon: ruins, iconScale: 1}).bindPopup('Руины Библиотеки').addTo(map);
+    var tech_station1 = L.marker([-12.768946, -38.452148], {icon: fortress, iconScale: 1}).bindPopup('Путевая Станция').addTo(map);
+    var ruins_village1 = L.marker([-8.450639, -29.223633], {icon: ruins, iconScale: 1}).bindPopup('Маленькое Селение').addTo(map);
+    var dustking_base = L.marker([1.45004, -43.945313], {icon: fortress, iconScale: 1}).bindPopup('Башня Пыльного Короля').addTo(map);
+    var ninjadragon_base = L.marker([7.972198, -32.651367], {icon: fortress, iconScale: 1}).bindPopup('Башня Ниндзя Черного Дракона').addTo(map);
+	
+    </script>
+  </body>
+</html>
